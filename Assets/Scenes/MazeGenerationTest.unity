@@ -323,15 +323,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d61e10aeedd9be4c8aca19c26d55d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeSize: {x: 15, y: 15}
+  mazeSize: {x: 10, y: 10}
   floorPrefab: {fileID: 4648155589317570017, guid: d57fa753f9bcd1e48baf9e8cd494b533,
     type: 3}
   destinationCellPrefab: {fileID: 3222892251630756862, guid: 761f528f7a9533743a8ba0638348852b,
     type: 3}
   wallPrefab: {fileID: 7853098482772288228, guid: 3f45be7d046653444a16f3ef133e5db1,
     type: 3}
-  helperPrefab: {fileID: 1347709423386050915, guid: 182aac68f32d8854482792c0030c5b5f,
-    type: 3}
+  player: {fileID: 5480344207840312163, guid: d87f0841415f6994282c2c821849835e, type: 3}
+  cellSize: 3
+  cellHeight: 0.1
+  wallThickness: 0.5
+  wallHeight: 5
 --- !u!4 &1654103957
 Transform:
   m_ObjectHideFlags: 0

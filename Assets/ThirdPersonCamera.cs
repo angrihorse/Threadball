@@ -4,25 +4,19 @@ using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-
     float yaw;
     float pitch;
 
-    public float mouseSensitivity = 10;
     public Transform target;
-    public float distanceFromTarget = 2;
+    public float mouseSensitivity = 10f;
+    public Vector2 minMaxDistanceFromTarget = new Vector2(0.5f, 2f);
     public Vector2 pitchMinMax = new Vector2(0, 45);
-
-    public float rotationSmoothTime = 1;
-    Vector3 rotationSmoothVelocity;
-    Vector3 currentRotation;
-
     public bool lockCursor;
-
 
     // Start is called before the first frame update
     void Start()
     {
+        Vector3 currentRotation = transform.eulerAngles;
         if (lockCursor) {
           Cursor.lockState = CursorLockMode.Locked;
           Cursor.visible = false;
@@ -30,15 +24,21 @@ public class ThirdPersonCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
         yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
         pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
         pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);
 
-        currentRotation = Vector3.SmoothDamp(currentRotation, new Vector3(pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);
-        transform.eulerAngles = currentRotation;
+        RaycastHit hit;
+        float cameraDistance;
+        if (Physics.Raycast(transform.position, -transform.forward, out hit)) {
+            cameraDistance = Mathf.Clamp(hit.distance * 0.9f, minMaxDistanceFromTarget.x, minMaxDistanceFromTarget.y);
+        } else {
+            cameraDistance = minMaxDistanceFromTarget.y;
+        }
 
-        transform.position = target.position - transform.forward * distanceFromTarget;
+        transform.eulerAngles = new Vector3(pitch, yaw);
+        transform.position = target.position - transform.forward * cameraDistance;
     }
 }
