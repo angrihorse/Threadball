@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
             }
             meshRenderer.enabled = false;
             playerScript.enabled = false;
+			transform.localScale = Vector3.zero;
             livesCount--;
 
             if (livesCount > 0) {
