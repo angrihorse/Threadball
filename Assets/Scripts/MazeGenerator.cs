@@ -18,15 +18,11 @@ public class MazeGenerator : MonoBehaviour
     public float wallThickness;
     public float wallHeight;
 
-    public bool instantiatePlayer;
-
     // Start is called before the first frame update
     void Start() {
         InitializeCells();
         GenerateMazeWithRecursiveBacktracker();
-        if (instantiatePlayer) {
-            PutPlayerOnStartingPosition();
-        }
+        PutPlayerOnStartingPosition();
         SetDestination();
         ScalePrefabs();
         InstantiateMaze();
@@ -190,7 +186,7 @@ public class MazeGenerator : MonoBehaviour
     public void ScalePrefabs() {
         floorPrefab.localScale = new Vector3(cellSize, cellHeight, cellSize);
         destinationCellPrefab.localScale = new Vector3(cellSize, cellHeight, cellSize);
-        wallPrefab.localScale = new Vector3(cellSize, wallHeight, wallThickness);
+        wallPrefab.localScale = new Vector3(cellSize + wallThickness, wallHeight, wallThickness);
     }
 
     void InstantiateMaze() {

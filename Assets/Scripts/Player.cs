@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+	public Player playerScript;
 
     public Rigidbody rb;
     Transform mainCamera;
@@ -15,10 +16,8 @@ public class Player : MonoBehaviour
     public float turnSmoothTime = 0.2f;
     float turnSmoothVelocity;
 
-    public MazeGenerator mazeGeneratorScript;
-    public GameObject maze;
-    public MeshRenderer meshRenderer;
-    public Player playerScript;
+    MazeGenerator mazeGeneratorScript;
+    GameObject maze;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +59,6 @@ public class Player : MonoBehaviour
                     GameObject.Destroy(child.gameObject);
                 }
             }
-            meshRenderer.enabled = false;
             playerScript.enabled = false;
 			transform.localScale = Vector3.zero;
             livesCount--;
